@@ -19,6 +19,45 @@ namespace InSight.Infra.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("InSight.Domain.Aggregates.Clientes.Models.Cliente", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IdCliente")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasColumnName("Cpf")
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnName("Email")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("Nome")
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CPF")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Cliente");
+                });
+
             modelBuilder.Entity("InSight.Domain.Aggregates.Produtos.Models.Categoria", b =>
                 {
                     b.Property<Guid>("Id")
@@ -26,13 +65,16 @@ namespace InSight.Infra.Data.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Descricao")
+                        .HasColumnName("Nome")
                         .HasColumnType("nvarchar(150)")
                         .HasMaxLength(150);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Nome")
+                        .IsUnique();
 
                     b.ToTable("Categoria");
                 });
@@ -58,7 +100,18 @@ namespace InSight.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Cnpj")
+                        .IsUnique();
+
                     b.ToTable("Fornecedor");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f2a39d17-72c3-474d-8191-2edce07c9356"),
+                            Cnpj = "03530117000175",
+                            Nome = "Hagen do Brasil"
+                        });
                 });
 
             modelBuilder.Entity("InSight.Domain.Aggregates.Produtos.Models.Produto", b =>
@@ -99,6 +152,78 @@ namespace InSight.Infra.Data.Migrations
                     b.ToTable("Produto");
                 });
 
+            modelBuilder.Entity("InSight.Domain.Aggregates.Usuarios.Models.Perfil", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("Nome")
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Perfil");
+                });
+
+            modelBuilder.Entity("InSight.Domain.Aggregates.Usuarios.Models.Usuario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("IdUsuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnName("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnName("Email")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("Nome")
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnName("Senha")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("InSight.Domain.Aggregates.Usuarios.Models.UsuarioPerfil", b =>
+                {
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnName("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PerfilId")
+                        .HasColumnName("PerfilId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UsuarioId", "PerfilId");
+
+                    b.HasIndex("PerfilId");
+
+                    b.ToTable("UsuarioPerfil");
+                });
+
             modelBuilder.Entity("InSight.Domain.Aggregates.Produtos.Models.Produto", b =>
                 {
                     b.HasOne("InSight.Domain.Aggregates.Produtos.Models.Categoria", "Categoria")
@@ -110,7 +235,22 @@ namespace InSight.Infra.Data.Migrations
                     b.HasOne("InSight.Domain.Aggregates.Produtos.Models.Fornecedor", "Fornecedor")
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("InSight.Domain.Aggregates.Usuarios.Models.UsuarioPerfil", b =>
+                {
+                    b.HasOne("InSight.Domain.Aggregates.Usuarios.Models.Perfil", "Perfil")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("PerfilId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("InSight.Domain.Aggregates.Usuarios.Models.Usuario", "Usuario")
+                        .WithMany("Perfis")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

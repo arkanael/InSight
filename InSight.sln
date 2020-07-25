@@ -15,16 +15,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - CrossCuting", "4.2 - CrossCuting", "{CBF15255-0DFA-436F-B7AE-A827B15C82CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InSight.Presentation.API", "src\InSight.Presentation.API\InSight.Presentation.API.csproj", "{7091548A-47E7-4C67-A38F-3F5DD490E28C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InSight.Presentation.API", "src\InSight.Presentation.API\InSight.Presentation.API.csproj", "{7091548A-47E7-4C67-A38F-3F5DD490E28C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InSight.Domain", "src\InSight.Domain\InSight.Domain.csproj", "{B8F642C5-DC62-4F36-8124-20FDB8C6ECD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InSight.Domain", "src\InSight.Domain\InSight.Domain.csproj", "{B8F642C5-DC62-4F36-8124-20FDB8C6ECD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InSight.Infra.Data", "src\InSight.Infra.Data\InSight.Infra.Data.csproj", "{916044A7-8F3C-4F70-8A9F-8B4D76B08CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InSight.Infra.Data", "src\InSight.Infra.Data\InSight.Infra.Data.csproj", "{916044A7-8F3C-4F70-8A9F-8B4D76B08CEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{315EA9DF-E495-4709-827F-B03B11826C79}"
 	ProjectSection(SolutionItems) = preProject
 		README.MD = README.MD
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InSight.Infra.CrossCutting.Criptography", "src\InSight.Infra.CrossCutting.Criptography\InSight.Infra.CrossCutting.Criptography.csproj", "{D7ED00D3-B3DF-4B67-B8AA-47880FC2EC4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InSight.Application", "src\InSight.Application\InSight.Application.csproj", "{E40CABF9-D8E2-4039-B767-ADA96780C216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +48,14 @@ Global
 		{916044A7-8F3C-4F70-8A9F-8B4D76B08CEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{916044A7-8F3C-4F70-8A9F-8B4D76B08CEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{916044A7-8F3C-4F70-8A9F-8B4D76B08CEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7ED00D3-B3DF-4B67-B8AA-47880FC2EC4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7ED00D3-B3DF-4B67-B8AA-47880FC2EC4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7ED00D3-B3DF-4B67-B8AA-47880FC2EC4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7ED00D3-B3DF-4B67-B8AA-47880FC2EC4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E40CABF9-D8E2-4039-B767-ADA96780C216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E40CABF9-D8E2-4039-B767-ADA96780C216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E40CABF9-D8E2-4039-B767-ADA96780C216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E40CABF9-D8E2-4039-B767-ADA96780C216}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +66,8 @@ Global
 		{7091548A-47E7-4C67-A38F-3F5DD490E28C} = {22F70953-CE28-419B-8AD5-EC206F8C577A}
 		{B8F642C5-DC62-4F36-8124-20FDB8C6ECD5} = {8F8F4A2B-962B-4A3A-8AAF-85B84B1C19EB}
 		{916044A7-8F3C-4F70-8A9F-8B4D76B08CEC} = {186837C8-4823-4DFD-AB50-5D067C7BEB4B}
+		{D7ED00D3-B3DF-4B67-B8AA-47880FC2EC4F} = {CBF15255-0DFA-436F-B7AE-A827B15C82CA}
+		{E40CABF9-D8E2-4039-B767-ADA96780C216} = {C922D0D4-31A2-4C0B-88DE-E75B9B59D96A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FBB307A-61D5-433E-B0A3-A2B2723B2A9D}

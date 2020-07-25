@@ -32,6 +32,10 @@ namespace InSight.Infra.Data.Mappings
                 .HasColumnName("Senha")
                 .HasMaxLength(50)
                 .IsRequired();
+
+            builder.Property(u => u.DataCriacao)
+              .HasColumnName("DataCriacao")
+              .IsRequired();
         }
     }
 }

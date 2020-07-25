@@ -22,6 +22,8 @@ namespace InSight.Infra.Data.Contexts
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Perfil> Perfils { get; set; }
+        public DbSet<UsuarioPerfil> UsuariosPerfils { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +32,8 @@ namespace InSight.Infra.Data.Contexts
             modelBuilder.ApplyConfiguration(new ProdutoMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new PerfilMap());
+            modelBuilder.ApplyConfiguration(new UsuarioPerfilMap());
 
             modelBuilder.Entity<Cliente>(entity =>
             {
@@ -46,6 +50,14 @@ namespace InSight.Infra.Data.Contexts
             {
                 entity.HasIndex(c => c.Nome).IsUnique();
             });
+
+            modelBuilder.Entity<Fornecedor>(entity =>
+            {
+                entity.HasIndex(c => c.Cnpj).IsUnique();
+                
+            });
+
+            modelBuilder.Entity<Fornecedor>().HasData(new Fornecedor { Nome = "Hagen do Brasil", Cnpj = "03530117000175"});
 
         }
     }

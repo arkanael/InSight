@@ -45,7 +45,8 @@ namespace InSight.Infra.Data.Mappings
 
             builder.HasOne(p => p.Fornecedor)
                 .WithMany(f => f.Produtos)
-                .HasForeignKey(p => p.FornecedorId);
+                .HasForeignKey(p => p.FornecedorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             #endregion
         }

@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregates\Clientes\Services\" />
-    <Folder Include="Aggregates\Produtos\Services\" />
-    <Folder Include="Aggregates\Usuarios\Services\" />
+    <Folder Include="Aggregates\Produtos\Exceptions\" />
   </ItemGroup>
 
 </Project>
