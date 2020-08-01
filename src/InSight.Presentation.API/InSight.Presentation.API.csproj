@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
@@ -17,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\InSight.Application\InSight.Application.csproj" />
+    <ProjectReference Include="..\InSight.Infra.CrossCutting.Criptography\InSight.Infra.CrossCutting.Criptography.csproj" />
     <ProjectReference Include="..\InSight.Infra.Data\InSight.Infra.Data.csproj" />
   </ItemGroup>
 

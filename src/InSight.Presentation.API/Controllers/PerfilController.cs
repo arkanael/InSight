@@ -7,11 +7,11 @@ namespace Projeto.Presentation.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class fornecedorController : ControllerBase
+    public class PerfilController : ControllerBase
     {
         private readonly FornecedorApplicationService fornecedorApplicationService;
 
-        public fornecedorController(FornecedorApplicationService fornecedorApplicationService)
+        public PerfilController(FornecedorApplicationService fornecedorApplicationService)
         {
             this.fornecedorApplicationService = fornecedorApplicationService;
         }

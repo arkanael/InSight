@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace InSight.Application.Contracts
 {
-    public interface ICategoriaApplicationServices
+    public interface ICategoriaApplicationService
     {
         void Create(CategoriaCadastroModel model);
         void Update(CategoriaEdicaoModel model);

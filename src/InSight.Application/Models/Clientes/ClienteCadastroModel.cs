@@ -20,6 +20,6 @@ namespace InSight.Application.Models.Clientes
         [Required(ErrorMessage = "Informe o cpf do cliente.")]
         public string CPF { get; set; }
 
-
+      
     }
 }

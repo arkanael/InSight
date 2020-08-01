@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InSight.Infra.Data.Contexts;
 using InSight.Presentation.API.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Projeto.Presentation.Api.Configurations;
 
 namespace InSight.Presentation.API
 {
@@ -36,7 +29,11 @@ namespace InSight.Presentation.API
 
             EntityFrameWorkSetup.ConfigurationServices(services, Configuration);
 
+            DependencyInjectionSetup.ConfigureServices(services);
+
             JWTSetup.ConfigureServices(services, Configuration);
+
+            AutoMapperSetup.ConfigureServices(services);
 
         }
 

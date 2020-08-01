@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace InSight.Application.Services
 {
-    public class CategoriaApplicationService : ICategoriaApplicationServices
+    public class CategoriaApplicationService : ICategoriaApplicationService
     {
         private readonly ICategoriaDomainService categoriaDomainService;
         private readonly IMapper mapper;
