@@ -19,20 +19,32 @@ namespace InSight.Application.Services
             this.mapper = mapper;
         }
 
-        public void Create(CategoriaCadastroModel model)
+        public CategoriaDTO Create(CategoriaCadastroModel model)
         {
-            categoriaDomainService.Create(mapper.Map<Categoria>(model));
+            var categoria = mapper.Map<Categoria>(model);
+            categoriaDomainService.Create(categoria);
+
+            return mapper.Map<CategoriaDTO>(categoria);
         }
 
-        public void Update(CategoriaEdicaoModel model)
+        public CategoriaDTO Update(CategoriaEdicaoModel model)
         {
-            categoriaDomainService.Update(mapper.Map<Categoria>(model));
+            var categoria = mapper.Map<Categoria>(model);
+            categoriaDomainService.Update(categoria);
+
+            return mapper.Map<CategoriaDTO>(categoria);
         }
 
-        public void Delete(CategoriaExclusaoModel model)
+        public CategoriaDTO Delete(CategoriaExclusaoModel model)
         {
-            categoriaDomainService.Delete(categoriaDomainService.GetById(Guid.Parse(model.Id)));
+            var id = Guid.Parse(model.Id);
+            var categoria = categoriaDomainService.GetById(id);
+
+            categoriaDomainService.Delete(categoria);
+
+            return mapper.Map<CategoriaDTO>(categoria);
         }
+
 
         public List<CategoriaDTO> GetAll()
         {

@@ -21,19 +21,28 @@ namespace InSight.Application.Services
             this.mapper = mapper;
         }
 
-        public void Create(ProdutoCadastroModel model)
+        public ProdutoDTO Create(ProdutoCadastroModel model)
         {
-            ProdutoDomainService.Create(mapper.Map<Produto>(model));
+            var produto = mapper.Map<Produto>(model);
+            ProdutoDomainService.Create(produto);
+
+            return mapper.Map<ProdutoDTO>(produto);
         }
 
-        public void Update(ProdutoEdicaoModel model)
+        public ProdutoDTO Update(ProdutoEdicaoModel model)
         {
-            ProdutoDomainService.Update(mapper.Map<Produto>(model));
+            var produto = mapper.Map<Produto>(model);
+            ProdutoDomainService.Update(produto);
+
+            return mapper.Map<ProdutoDTO>(produto);
         }
 
-        public void Delete(ProdutoExclusaoModel model)
+        public ProdutoDTO Delete(ProdutoExclusaoModel model)
         {
-            ProdutoDomainService.Delete(ProdutoDomainService.GetById(Guid.Parse(model.Id)));
+            var produto = mapper.Map<Produto>(model);
+            ProdutoDomainService.Delete(produto);
+
+            return mapper.Map<ProdutoDTO>(produto);
         }
 
         public List<ProdutoDTO> GetAll()

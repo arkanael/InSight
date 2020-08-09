@@ -6,9 +6,9 @@ namespace InSight.Application.Contracts
 {
     public interface IPerfilAppicationService
     {
-        void Create(PerfilCadastroModel model);
-        void Update(PerfilEdicaoModel model);
-        void Delete(PerfilExclusaoModel model);
+        PerfilDTO Create(PerfilCadastroModel model);
+        PerfilDTO Update(PerfilEdicaoModel model);
+        PerfilDTO Delete(PerfilExclusaoModel model);
         List<PerfilDTO> GetAll();
         PerfilDTO GetById(string id);
     }

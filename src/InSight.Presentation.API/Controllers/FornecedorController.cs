@@ -1,5 +1,6 @@
-﻿using InSight.Application.Models.Fornecedores;
-using InSight.Application.Services;
+﻿
+using InSight.Application.Contracts;
+using InSight.Application.Models.Fornecedores;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -7,11 +8,13 @@ namespace Projeto.Presentation.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class fornecedorController : ControllerBase
+    public class FornecedoresController : ControllerBase
     {
-        private readonly FornecedorApplicationService fornecedorApplicationService;
+        //atributo
+        private IFornecedorApplicationService fornecedorApplicationService;
 
-        public fornecedorController(FornecedorApplicationService fornecedorApplicationService)
+        //construtor para injeção de dependência
+        public FornecedoresController(IFornecedorApplicationService fornecedorApplicationService)
         {
             this.fornecedorApplicationService = fornecedorApplicationService;
         }
@@ -21,8 +24,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                fornecedorApplicationService.Create(model);
-                return Ok("fornecedor cadastrado com sucesso.");
+                var result = fornecedorApplicationService.Create(model);
+
+                return Ok(new
+                {
+                    Message = "Fornecedor cadastrado com sucesso.",
+                    Fornecedor = result
+                });
             }
             catch (Exception e)
             {
@@ -35,8 +43,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                fornecedorApplicationService.Update(model);
-                return Ok("fornecedor atualizado com sucesso.");
+                var result = fornecedorApplicationService.Update(model);
+
+                return Ok(new
+                {
+                    Message = "Fornecedor atualizado com sucesso.",
+                    Fornecedor = result
+                });
             }
             catch (Exception e)
             {
@@ -51,8 +64,13 @@ namespace Projeto.Presentation.Api.Controllers
             {
                 var model = new FornecedorExclusaoModel() { Id = id };
 
-                fornecedorApplicationService.Delete(model);
-                return Ok("fornecedor excluído com sucesso.");
+                var result = fornecedorApplicationService.Delete(model);
+
+                return Ok(new
+                {
+                    Message = "Fornecedor excluído com sucesso.",
+                    Fornecedor = result
+                });
             }
             catch (Exception e)
             {
@@ -87,4 +105,3 @@ namespace Projeto.Presentation.Api.Controllers
         }
     }
 }
-

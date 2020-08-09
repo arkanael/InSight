@@ -22,24 +22,29 @@ namespace InSight.Application.Services
             this.mapper = mapper;
         }
 
-        public void Create(UsuarioCadastroModel model)
+        public UsuarioDTO Create(UsuarioCadastroModel model)
         {
+
             var usuario = mapper.Map<Usuario>(model);
             usuarioDomainService.Create(usuario);
+
+            return mapper.Map<UsuarioDTO>(usuario);
         }
 
-        public void Update(UsuarioEdicaoModel model)
+        public UsuarioDTO Update(UsuarioEdicaoModel model)
         {
             var usuario = mapper.Map<Usuario>(model);
             usuarioDomainService.Update(usuario);
+
+            return mapper.Map<UsuarioDTO>(usuario);
         }
 
-        public void Delete(UsuarioExclusaoModel model)
+        public UsuarioDTO Delete(UsuarioExclusaoModel model)
         {
-            var idUsuario = Guid.Parse(model.IdUsuario);
-            var usuario = usuarioDomainService.GetById(idUsuario);
-
+            var usuario = mapper.Map<Usuario>(model);
             usuarioDomainService.Delete(usuario);
+
+            return mapper.Map<UsuarioDTO>(usuario);
         }
 
         public List<UsuarioDTO> GetAll()

@@ -1,4 +1,6 @@
-﻿using InSight.Application.Models.Clientes;
+﻿
+using InSight.Application.Contracts;
+using InSight.Application.Models.Clientes;
 using InSight.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,22 +9,30 @@ namespace Projeto.Presentation.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClienteController : ControllerBase
+    public class clienteesController : ControllerBase
     {
-        private readonly ClienteApplicationService clienteApplicationService;
+        //atributo
+        private ClienteApplicationService clienteApplicationService;
 
-        public ClienteController(ClienteApplicationService clienteApplicationService)
+        public clienteesController(ClienteApplicationService clienteApplicationService)
         {
             this.clienteApplicationService = clienteApplicationService;
         }
+
+        //construtor para injeção de dependência
 
         [HttpPost]
         public IActionResult Post(ClienteCadastroModel model)
         {
             try
             {
-                clienteApplicationService.Create(model);
-                return Ok("cliente cadastrado com sucesso.");
+                var result = clienteApplicationService.Create(model);
+
+                return Ok(new
+                {
+                    Message = "cliente cadastrado com sucesso.",
+                    cliente = result
+                });
             }
             catch (Exception e)
             {
@@ -35,8 +45,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                clienteApplicationService.Update(model);
-                return Ok("cliente atualizado com sucesso.");
+                var result = clienteApplicationService.Update(model);
+
+                return Ok(new
+                {
+                    Message = "cliente atualizado com sucesso.",
+                    cliente = result
+                });
             }
             catch (Exception e)
             {
@@ -51,8 +66,13 @@ namespace Projeto.Presentation.Api.Controllers
             {
                 var model = new ClienteExclusaoModel() { Id = id };
 
-                clienteApplicationService.Delete(model);
-                return Ok("cliente excluído com sucesso.");
+                var result = clienteApplicationService.Delete(model);
+
+                return Ok(new
+                {
+                    Message = "cliente excluído com sucesso.",
+                    cliente = result
+                });
             }
             catch (Exception e)
             {
@@ -87,4 +107,3 @@ namespace Projeto.Presentation.Api.Controllers
         }
     }
 }
-

@@ -1,4 +1,4 @@
-﻿using InSight.Application.Models.Fornecedores;
+﻿using InSight.Application.Models.Perfils;
 using InSight.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,20 +9,29 @@ namespace Projeto.Presentation.Api.Controllers
     [ApiController]
     public class PerfilController : ControllerBase
     {
-        private readonly FornecedorApplicationService fornecedorApplicationService;
+        //atributo
+        private readonly PerfilApplicationService PerfilApplicationService;
 
-        public PerfilController(FornecedorApplicationService fornecedorApplicationService)
+        public PerfilController(PerfilApplicationService perfilApplicationService)
         {
-            this.fornecedorApplicationService = fornecedorApplicationService;
+            PerfilApplicationService = perfilApplicationService;
         }
 
+        //construtor para injeção de dependência
+
+
         [HttpPost]
-        public IActionResult Post(FornecedorCadastroModel model)
+        public IActionResult Post(PerfilCadastroModel model)
         {
             try
             {
-                fornecedorApplicationService.Create(model);
-                return Ok("fornecedor cadastrado com sucesso.");
+                var result = PerfilApplicationService.Create(model);
+
+                return Ok(new
+                {
+                    Message = "Perfil cadastrado com sucesso.",
+                    Perfil = result
+                });
             }
             catch (Exception e)
             {
@@ -31,12 +40,17 @@ namespace Projeto.Presentation.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put(FornecedorEdicaoModel model)
+        public IActionResult Put(PerfilEdicaoModel model)
         {
             try
             {
-                fornecedorApplicationService.Update(model);
-                return Ok("fornecedor atualizado com sucesso.");
+                var result = PerfilApplicationService.Update(model);
+
+                return Ok(new
+                {
+                    Message = "Perfil atualizado com sucesso.",
+                    Perfil = result
+                });
             }
             catch (Exception e)
             {
@@ -49,10 +63,14 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                var model = new FornecedorExclusaoModel() { Id = id };
+                var model = new PerfilExclusaoModel() { Id = id };
+                var result = PerfilApplicationService.Delete(model);
 
-                fornecedorApplicationService.Delete(model);
-                return Ok("fornecedor excluído com sucesso.");
+                return Ok(new
+                {
+                    Message = "Perfil excluído com sucesso.",
+                    Perfil = result
+                });
             }
             catch (Exception e)
             {
@@ -65,7 +83,7 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                return Ok(fornecedorApplicationService.GetAll());
+                return Ok(PerfilApplicationService.GetAll());
             }
             catch (Exception e)
             {
@@ -78,7 +96,7 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                return Ok(fornecedorApplicationService.GetById(id));
+                return Ok(PerfilApplicationService.GetById(id));
             }
             catch (Exception e)
             {

@@ -7,13 +7,13 @@ namespace Projeto.Presentation.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriaController : ControllerBase
+    public class CategoriasController : ControllerBase
     {
         //atributo
         private readonly ICategoriaApplicationService categoriaApplicationService;
 
         //construtor para injeção de dependência
-        public CategoriaController(ICategoriaApplicationService categoriaApplicationService)
+        public CategoriasController(ICategoriaApplicationService categoriaApplicationService)
         {
             this.categoriaApplicationService = categoriaApplicationService;
         }
@@ -23,8 +23,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                categoriaApplicationService.Create(model);
-                return Ok("Categoria cadastrado com sucesso.");
+                var result = categoriaApplicationService.Create(model);
+
+                return Ok(new
+                {
+                    Message = "Categoria cadastrado com sucesso.",
+                    Categoria = result
+                });
             }
             catch (Exception e)
             {
@@ -37,8 +42,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                categoriaApplicationService.Update(model);
-                return Ok("Categoria atualizado com sucesso.");
+                var result = categoriaApplicationService.Update(model);
+
+                return Ok(new
+                {
+                    Message = "Categoria atualizado com sucesso.",
+                    Categoria = result
+                });
             }
             catch (Exception e)
             {
@@ -52,9 +62,13 @@ namespace Projeto.Presentation.Api.Controllers
             try
             {
                 var model = new CategoriaExclusaoModel() { Id = id };
+                var result = categoriaApplicationService.Delete(model);
 
-                categoriaApplicationService.Delete(model);
-                return Ok("Categoria excluído com sucesso.");
+                return Ok(new
+                {
+                    Message = "Categoria excluído com sucesso.",
+                    Categoria = result
+                });
             }
             catch (Exception e)
             {

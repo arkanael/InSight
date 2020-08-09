@@ -7,15 +7,15 @@ namespace Projeto.Presentation.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutosController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
         //atributo
-        private IProdutoApplicationService produtoApplicationService;
+        private readonly IProdutoApplicationService ProdutoApplicationService;
 
         //construtor para injeção de dependência
-        public ProdutosController(IProdutoApplicationService produtoApplicationService)
+        public ProdutoController(IProdutoApplicationService ProdutoApplicationService)
         {
-            this.produtoApplicationService = produtoApplicationService;
+            this.ProdutoApplicationService = ProdutoApplicationService;
         }
 
         [HttpPost]
@@ -23,8 +23,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                produtoApplicationService.Create(model);
-                return Ok("Produto cadastrado com sucesso.");
+                var result = ProdutoApplicationService.Create(model);
+
+                return Ok(new
+                {
+                    Message = "Produto cadastrado com sucesso.",
+                    Produto = result
+                });
             }
             catch (Exception e)
             {
@@ -37,8 +42,13 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                produtoApplicationService.Update(model);
-                return Ok("Produto atualizado com sucesso.");
+                var result = ProdutoApplicationService.Update(model);
+
+                return Ok(new
+                {
+                    Message = "Produto atualizado com sucesso.",
+                    Produto = result
+                });
             }
             catch (Exception e)
             {
@@ -52,9 +62,13 @@ namespace Projeto.Presentation.Api.Controllers
             try
             {
                 var model = new ProdutoExclusaoModel() { Id = id };
+                var result = ProdutoApplicationService.Delete(model);
 
-                produtoApplicationService.Delete(model);
-                return Ok("Produto excluído com sucesso.");
+                return Ok(new
+                {
+                    Message = "Produto excluído com sucesso.",
+                    Produto = result
+                });
             }
             catch (Exception e)
             {
@@ -67,7 +81,7 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                return Ok(produtoApplicationService.GetAll());
+                return Ok(ProdutoApplicationService.GetAll());
             }
             catch (Exception e)
             {
@@ -80,7 +94,7 @@ namespace Projeto.Presentation.Api.Controllers
         {
             try
             {
-                return Ok(produtoApplicationService.GetById(id));
+                return Ok(ProdutoApplicationService.GetById(id));
             }
             catch (Exception e)
             {
@@ -89,3 +103,4 @@ namespace Projeto.Presentation.Api.Controllers
         }
     }
 }
+

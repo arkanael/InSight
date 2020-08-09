@@ -3,6 +3,7 @@ using InSight.Application.Contracts;
 using InSight.Application.DTOs;
 using InSight.Application.Models.Fornecedores;
 using InSight.Domain.Aggregates.Bases.Contracts;
+using InSight.Domain.Aggregates.Fornecedors.Services;
 using InSight.Domain.Aggregates.Produtos.Models;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,30 @@ namespace InSight.Application.Services
             this.mapper = mapper;
         }
 
-        public void Create(FornecedorCadastroModel model)
+        public FornecedorDTO Create(FornecedorCadastroModel model)
         {
-            FornecedorDomainService.Create(mapper.Map<Fornecedor>(model));
+            var fornecedor = mapper.Map<Fornecedor>(model);
+            FornecedorDomainService.Create(fornecedor);
+
+            return mapper.Map<FornecedorDTO>(fornecedor);
         }
 
-        public void Update(FornecedorEdicaoModel model)
+        public FornecedorDTO Update(FornecedorEdicaoModel model)
         {
-            FornecedorDomainService.Update(mapper.Map<Fornecedor>(model));
+            var fornecedor = mapper.Map<Fornecedor>(model);
+            FornecedorDomainService.Update(fornecedor);
+
+            return mapper.Map<FornecedorDTO>(fornecedor);
         }
 
-        public void Delete(FornecedorExclusaoModel model)
+        public FornecedorDTO Delete(FornecedorExclusaoModel model)
         {
-            FornecedorDomainService.Delete(FornecedorDomainService.GetById(Guid.Parse(model.Id)));
+            var idFornecedor = Guid.Parse(model.Id);
+            var fornecedor = FornecedorDomainService.GetById(idFornecedor);
+
+            FornecedorDomainService.Delete(fornecedor);
+
+            return mapper.Map<FornecedorDTO>(fornecedor);
         }
 
         public List<FornecedorDTO> GetAll()

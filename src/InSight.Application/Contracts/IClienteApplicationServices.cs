@@ -6,9 +6,9 @@ namespace InSight.Application.Contracts
 {
     public interface IClienteApplicationServices
     {
-        void Create(ClienteCadastroModel model);
-        void Update(ClienteEdicaoModel model);
-        void Delete(ClienteExclusaoModel model);
+        ClienteDTO Create(ClienteCadastroModel model);
+        ClienteDTO Update(ClienteEdicaoModel model);
+        ClienteDTO Delete(ClienteExclusaoModel model);
         List<ClienteDTO> GetAll();
         ClienteDTO GetById(string id);
     }

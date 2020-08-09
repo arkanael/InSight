@@ -6,9 +6,9 @@ namespace InSight.Application.Contracts
 {
     public interface IUsuarioApplicationService
     {
-        void Create(UsuarioCadastroModel model);
-        void Update(UsuarioEdicaoModel model);
-        void Delete(UsuarioExclusaoModel model);
+        UsuarioDTO Create(UsuarioCadastroModel model);
+        UsuarioDTO Update(UsuarioEdicaoModel model);
+        UsuarioDTO Delete(UsuarioExclusaoModel model);
         List<UsuarioDTO> GetAll();
         UsuarioDTO GetById(string id);
     }

@@ -19,19 +19,28 @@ namespace InSight.Application.Services
             this.mapper = mapper;
         }
 
-        public void Create(PerfilCadastroModel model)
+        public PerfilDTO Create(PerfilCadastroModel model)
         {
-            PerfilDomainService.Create(mapper.Map<Perfil>(model));
+            var perfil = mapper.Map<Perfil>(model);
+            PerfilDomainService.Create(perfil);
+
+            return mapper.Map<PerfilDTO>(perfil);
         }
 
-        public void Update(PerfilEdicaoModel model)
+        public PerfilDTO Update(PerfilEdicaoModel model)
         {
-            PerfilDomainService.Update(mapper.Map<Perfil>(model));
+            var perfil = mapper.Map<Perfil>(model);
+            PerfilDomainService.Update(perfil);
+
+            return mapper.Map<PerfilDTO>(perfil);
         }
 
-        public void Delete(PerfilExclusaoModel model)
+        public PerfilDTO Delete(PerfilExclusaoModel model)
         {
-            PerfilDomainService.Delete(PerfilDomainService.GetById(Guid.Parse(model.Id)));
+            var perfil = mapper.Map<Perfil>(model);
+            PerfilDomainService.Delete(perfil);
+
+            return mapper.Map<PerfilDTO>(perfil);
         }
 
         public List<PerfilDTO> GetAll()
